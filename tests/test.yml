@@ -5,4 +5,4 @@
     - variables.yml
     - vault.yml
   roles:
-    - credstash-store
+    - ansible-role-credstash-store
