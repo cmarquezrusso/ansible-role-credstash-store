@@ -1,0 +1,7 @@
+---
+# defaults file for credstash-store
+credstash_profile: default # Using default boto profile
+credstash_table: encrypted-table # Default table
+credstash_items: keys # Some Keys
+credstash_region: us-west-2 # Using Oregon as a default region
+credstash_install: true # Will install credstash if not installed

@@ -1,0 +1,25 @@
+---
+# tasks file for credstash-store
+
+- name: Checking if credstash is installed
+  command: credstash --help
+  register: credstash_check
+  ignore_errors: yes
+
+- name: Credstash is not installed. Installing
+  pip:
+    name: credstash
+  when: credstash_check.rc != 0 and credstash_install == true
+
+- fail:
+    msg: "Credstash is not installed. Exiting"
+  when: credstash_check.rc != 0 and credstash_install == false
+
+- debug:
+    msg: "Credstash is using {{ credstash_profile }} boto profile and {{ credstash_table }} table "
+
+- name: Sending variables to credstash
+  no_log: True
+  command: "credstash -p {{ credstash_profile }} -t {{ credstash_table }} -r {{ credstash_region }} put {{ item.name }} {{ item.value }}"
+  with_items:
+     - "{{ credstash_items }}"

@@ -1,0 +1,7 @@
+credstash_profile: default
+credstash_table: credential-store
+credstash_region: ap-southeast-2
+
+credstash_items:
+  - { name: 'user', value: "{{ vault_encrypted_user }}" }
+  - { name: 'password', value: "{{ vault_encrypted_password }}" }
