@@ -5,21 +5,26 @@
   command: credstash --help
   register: credstash_check
   ignore_errors: yes
+  check_mode: yes
 
 - name: Credstash is not installed. Installing
   pip:
     name: credstash
   when: credstash_check.rc != 0 and credstash_install == true
+  check_mode: no
 
 - fail:
     msg: "Credstash is not installed. Exiting"
   when: credstash_check.rc != 0 and credstash_install == false
+  check_mode: yes
 
 - debug:
     msg: "Credstash is using {{ credstash_profile }} boto profile and {{ credstash_table }} table "
+  check_mode: yes
 
 - name: Sending variables to credstash
   no_log: True
   command: "credstash -p {{ credstash_profile }} -t {{ credstash_table }} -r {{ credstash_region }} put {{ item.name }} {{ item.value }}"
   with_items:
      - "{{ credstash_items }}"
+  check_mode: no
