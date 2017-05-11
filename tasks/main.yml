@@ -5,8 +5,7 @@
   command: credstash --help
   register: credstash_check
   ignore_errors: yes
-  check_mode: yes
-
+  
 - name: Credstash is not installed. Installing
   pip:
     name: credstash
