@@ -23,7 +23,7 @@
 
 - name: Sending variables to credstash
   no_log: True
-  command: "credstash -p {{ credstash_profile }} -t {{ credstash_table }} -r {{ credstash_region }} put {{ item.name }} {{ item.value }}  -a"
+  command: "credstash -p {{ credstash_profile }} -t {{ credstash_table }} -r {{ credstash_region }} put {{ item.name }} \"{{ item.value }}\"  -a"
   with_items:
      - "{{ credstash_items }}"
   check_mode: no
